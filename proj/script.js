@@ -28,9 +28,15 @@ const splitter = (arr) => { // разделитель массива и форм
         person[0] = String(person[0]).replace(reg, '$2'); // поле name: содержит содержимое 2-ой группы. Например Margara
         person[1] = String(person[1]).replace(reg, '$2'); // аналогично с salary
         person[2] = String(person[2]).replace(reg, '$2'); // pets
-        NewArr.push(createWorker(person[0], person[1], person[2])); 
+        NewArr.push(createWorker(person[0], person[1], person[2]));
+        checkPets(person[2]); // проверка работников на наличие питомцев 
     }
     return NewArr;
+}
+
+const checkPets = (str) => {
+    let petReg = /h..ster/gi; // если у работника есть hamster - зафиксировать 
+    str.match(petReg) !== null ? console.log(str) : console.log('not hamsters');
 }
 
 const array = splitter(workers); // массив из объектов работников 
