@@ -8,7 +8,7 @@ const workers = ['Name: Margara, salary: 59€, pets: cat hamster','Name: Zuhra,
 'Name: Franclin Perker, salary: 253€, pets: cat dog','Name: Jess, salary: 578€, pets: none','Name: Micle, salary: 410£, pets: none','Name: Lilu, salary: 312£, pets: none',
 'Name: Samon Dalas, salary: 270₽, pets: parrot dog'];
 
-class Worker {
+class Worker { // объект работника
     constructor(name, salary, pets){
         this.name = name;
         this.salary = salary;
@@ -16,18 +16,22 @@ class Worker {
     }
 }
 
-function createWorker(name, salary, pets){
+function createWorker(name, salary, pets){ // фабрика работников
     return new Worker(name, salary, pets);
 };
 
-const splitter = (arr) => {
+const splitter = (arr) => { // разделитель массива и формирование объектов, которые в дальнейшем становятся работниками
+    let reg = /(.*:\s)(.*)/; // во 2-ой группе будет значение ключа объекта
     let NewArr = [];
     for(let i=0; i < arr.length; i += 1){
         let person = arr[i].split(', ');
-        NewArr.push(createWorker(person[0], person[1], person[2]));
-        
+        person[0] = String(person[0]).replace(reg, '$2'); // поле name: содержит содержимое 2-ой группы. Например Margara
+        person[1] = String(person[1]).replace(reg, '$2'); // аналогично с salary
+        person[2] = String(person[2]).replace(reg, '$2'); // pets
+        NewArr.push(createWorker(person[0], person[1], person[2])); 
     }
     return NewArr;
 }
 
-const array = splitter(workers);
+const array = splitter(workers); // массив из объектов работников 
+console.log(array);
