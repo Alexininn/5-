@@ -39,13 +39,20 @@ const splitter = (arr) => { // разделитель массива и форм
 }
 
 const createCards = (num, data) => {
+	const cardField = document.createElement('div');
 	const card = document.createElement('div');
+	const cardBack = document.createElement('div');
+	cardField.classList.add('cardField');
 	// card.style.width = cards.offsetWidth / 4.5 + 'px';
 	// card.style.height = cards.offsetHeight / 2 + 'px';
 	card.classList.add('card');
+	cardBack.classList.add('cardBack');
 	//card.setAttribute('cardnum', `${num}`)
-	card.textContent = `Name: ${data.name}; Salary: ${data.salary}; Pets: ${data.pets}`;
-	cards.append(card);
+	card.innerHTML = `Name: ${data.name}<br> Salary: ${data.salary}<br> Pets: ${data.pets}`;
+	
+	cards.append(cardField);
+	cardField.append(card);
+	cardField.append(cardBack);
 	
 }
 // const checkPets = (str) => {
@@ -67,14 +74,36 @@ console.log(array);
 const arrayWoutPets = remover(arrOfObjWorkers);
 console.log(arrayWoutPets);
 
-const btn = document.getElementById('btn');
 
+const arrCards = document.querySelectorAll('.cardField');
+let allow = false;
 const deleteCard = () => {
-	const arrCards = document.querySelectorAll('.card');
+	allow = true;
 	console.log(arrCards);
 	for(let i=0; i < arrayWoutPets.length; i += 1){
-		arrayWoutPets[i] === null ? arrCards[i].remove() : '';
+		if(arrayWoutPets[i] === null){ 
+			arrCards[i].classList.toggle('cardRoll')
+			// arrCards[i].firstChild.classList.toggle('borderNone') 
+		}
 	}
 }
 
-btn.addEventListener('click', deleteCard);
+const confirmDeletion = () => {
+	for(let i=0; i < arrayWoutPets.length; i += 1){
+		if(arrayWoutPets[i] === null && allow){ 
+			arrCards[i].style.boxShadow = '0px 0px 10px 10px brown';
+			setTimeout(() => {
+				arrCards[i].remove();
+			}, 1300)
+
+			// arrCards[i].firstChild.classList.toggle('borderNone') 
+		}
+	}
+	allow = false;
+}
+const remBut = document.getElementById('remBut');
+const confBut = document.getElementById('confBut');
+
+remBut.addEventListener('click', deleteCard);
+confBut.addEventListener('click', confirmDeletion);
+
