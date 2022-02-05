@@ -1,0 +1,97 @@
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+	display: flex;
+	justify-content: center;
+	user-select: none;
+}
+#cards{
+	height: 100%;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	flex-wrap: wrap;
+	
+	/* perspective: 1000px;
+	perspective-origin: center center;
+	transform-style: preserve-3d; */
+}
+.cardField{
+	height: 500px;
+	width: 400px;
+	/* border: 5px solid black; */
+	box-sizing: border-box;
+	transition: 1.5s;
+	/* perspective: 1000px; */
+	/* perspective-origin: center center; */
+	transform-style: preserve-3d;
+	position: relative;
+	/* backface-visibility: hidden; */
+}
+.card, .button, .cardBack{
+	height: 500px;
+	width: 400px;
+	border: 5px solid black;
+	box-sizing: border-box;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	
+	text-shadow: 0px 2px 2px wheat;
+	gap: 5px;
+	/* transition: 5s; */
+}
+.card{
+	position: absolute;
+	backface-visibility: hidden;
+	background-image: url(imgs/card_face.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	/* transform: translateZ(50px); */
+}
+.cardData{
+	display: flex;
+  width: 100%;
+	height: 20%;
+  background-color: black; 
+  color: white;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.cardBack{
+	transform: rotateY(180deg);
+	background-image: url(imgs/card_back.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	position: absolute;
+	backface-visibility: hidden;
+	background-color: black;
+	/* transform: translateZ(0px); */
+}
+.cardRoll{
+	transform: rotateY(180deg);
+	/* background-image: url(card_cover.jpg);
+	background-size: contain;
+	background-repeat: no-repeat; */
+}
+#buttons{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	width: 10%;
+	height: 100%;
+}
+.button{
+	height: 50px;
+	width: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	cursor: pointer;
+}
